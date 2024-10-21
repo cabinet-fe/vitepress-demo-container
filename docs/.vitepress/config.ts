@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { DemoContainer } from '../../src'
+import container from 'markdown-it-container'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -30,6 +31,12 @@ export default defineConfig({
   markdown: {
     config: md => {
       md.use(DemoContainer)
+    }
+  },
+
+  vite: {
+    server: {
+      port: 5183
     }
   }
 })

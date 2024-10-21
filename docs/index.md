@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "demo容器"
-  text: "demo容器文档"
+  name: 'demo容器'
+  text: 'demo容器文档1'
   tagline: My great project tagline
   actions:
     - theme: brand
@@ -23,3 +23,10 @@ features:
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
+<script setup>
+import Test1 from './demos/test1.vue'
+</script>
+
+::: demo
+render(docs/demos/test1.vue)
+:::
