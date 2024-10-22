@@ -1,0 +1,10 @@
+{
+  "name": "vitepress-demo-container-docs",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run vitepress dev",
+    "build": "bun run vitepress build",
+    "preview": "bun run vitepress preview"
+  }
+}

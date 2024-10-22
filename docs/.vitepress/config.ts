@@ -1,30 +1,20 @@
 import { defineConfig } from 'vitepress'
-import { DemoContainer } from '../../src'
-import container from 'markdown-it-container'
+import { DemoContainer } from '../../lib/plugin'
+import { UltraUIResolver } from 'vite-helper'
+import Components from 'unplugin-vue-components/vite'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'demo容器',
-  description: 'demo容器文档',
+  title: 'Demo容器',
+  description: '基于vitepress快捷生成你的文档',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
-    ],
-
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      {
+        icon: 'github',
+        link: 'https://github.com/cabinet-fe/vitepress-demo-container'
+      }
     ]
   },
 
@@ -35,8 +25,16 @@ export default defineConfig({
   },
 
   vite: {
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js']
+    },
     server: {
       port: 5183
-    }
+    },
+    plugins: [
+      Components({
+        resolvers: [UltraUIResolver]
+      })
+    ]
   }
 })
