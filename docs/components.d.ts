@@ -10,13 +10,8 @@ declare module 'vue' {
     UButton: typeof import('ultra-ui')['UButton']
     UCard: typeof import('ultra-ui')['UCard']
     UCardAction: typeof import('ultra-ui')['UCardAction']
-    UCardActions: typeof import('ultra-ui')['UCardActions']
-    UCardBody: typeof import('ultra-ui')['UCardBody']
     UCardContent: typeof import('ultra-ui')['UCardContent']
-    UCardFoot: typeof import('ultra-ui')['UCardFoot']
-    UCardFooter: typeof import('ultra-ui')['UCardFooter']
     UCardHeader: typeof import('ultra-ui')['UCardHeader']
     UDialog: typeof import('ultra-ui')['UDialog']
-    UIcon: typeof import('ultra-ui')['UIcon']
   }
 }

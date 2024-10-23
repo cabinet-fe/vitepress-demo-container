@@ -12,7 +12,7 @@ export default defineConfig({
     },
 
     rollupOptions: {
-      external: ['vue', 'markdown-it', 'vitepress'],
+      external: ['vue', 'markdown-it', 'vitepress', 'path', 'fs'],
       output: {
         globals: {
           vue: 'Vue'

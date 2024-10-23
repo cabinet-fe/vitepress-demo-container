@@ -20,21 +20,23 @@
     </u-card-action>
   </u-card>
 
-  <u-dialog v-model="visible" :modal="false" title="源码" style="width: 80vw">
+  <u-dialog v-model="visible" :modal="false" :title="title" style="width: 80vw">
     <div v-html="code" class="language-vue"></div>
 
     <template #footer>
-      <u-button :icon="Copy" @click="copyCode" text type="primary" />
+      <u-button :icon="Copy" @click="copyCode" circle text type="primary" />
     </template>
   </u-dialog>
 </template>
 
 <script lang="ts" setup>
 import { shallowRef, watchEffect, type Component } from 'vue'
-import CodeOpen from './icons/code-open.vue'
+import CodeOpen from './icons/code.vue'
 import Copy from './icons/copy.vue'
 import { codeToHtml } from 'shiki'
+import { clipboard } from 'cat-kit/fe'
 import { useData } from 'vitepress'
+import { message } from 'ultra-ui'
 
 defineOptions({
   name: 'Demo',
@@ -66,8 +68,16 @@ watchEffect(async () => {
   )
 })
 
-const copyCode = () => {
-  props.sourceCode &&
-    navigator.clipboard.writeText(decodeURIComponent(props.sourceCode))
+const copyCode = async () => {
+  const { sourceCode } = props
+  if (!sourceCode) return
+  await clipboard.copy(decodeURIComponent(sourceCode))
+  message.success('复制成功')
 }
 </script>
+
+<style lang="css">
+.language-vue .shiki {
+  background-color: transparent !important;
+}
+</style>

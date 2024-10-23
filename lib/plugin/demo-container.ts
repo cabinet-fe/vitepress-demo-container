@@ -4,12 +4,17 @@ import path from 'path'
 import fs from 'fs'
 import type { RenderRule } from 'markdown-it/lib/renderer.mjs'
 import type { MarkdownEnv } from 'vitepress'
-import { addDemoComponent, addImportScript, addScriptStatement } from './helper'
+import { addDemoComponent, addImportScript } from './helper'
 
 interface ContainerOptions {
   /** 示例组件根目录 */
   demoRootDir: string
 }
+
+type MDFilePath = string
+
+/** 用于缓存已经解析的markdown脚本 */
+const envCaches = new Map<MDFilePath, Set<string>>()
 
 /**
  * @description 创建demo容器, 用于展示vue示例组件
@@ -18,13 +23,20 @@ interface ContainerOptions {
 export function DemoContainer(md: MarkdownIt, options?: ContainerOptions) {
   const { demoRootDir } = options ?? {}
 
+  const mdRender = md.render
+
+  md.render = (src, env) => {
+    envCaches.set(env.path, new Set())
+    return mdRender(src, env)
+  }
+
   const renderRE = /^render\((.*)\)$/
 
   const render: RenderRule = (tokens, idx, _, env: MarkdownEnv) => {
     const token = tokens[idx]!
 
     if (token.nesting === 1) {
-      const title = token.info?.trim().split(' ')[1] ?? ''
+      const title = token.info?.trim().slice(4)
 
       const demoContent = tokens.slice(idx).find(token => {
         return token.content.trim().startsWith('render')
@@ -40,8 +52,15 @@ export function DemoContainer(md: MarkdownIt, options?: ContainerOptions) {
 
         const fileExist = fs.existsSync(demoFullPath)
 
-        addDemoComponent(env)
-        const componentName = addImportScript(env, demoPath, demoFullPath)
+        /** 添加demo组件导入脚本 */
+        addDemoComponent(env, envCaches)
+
+        const componentName = addImportScript(
+          env,
+          demoPath,
+          demoFullPath,
+          envCaches
+        )
 
         const sourceCode = encodeURIComponent(
           fileExist ? fs.readFileSync(demoFullPath, 'utf-8') : ''

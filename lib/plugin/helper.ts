@@ -3,17 +3,33 @@ import type { MarkdownEnv } from 'vitepress'
 import path from 'path'
 
 type MDFilePath = string
-const importCache = new Map<MDFilePath, Set<string>>()
 
-export function addScriptStatement(env: MarkdownEnv, statement: string) {
+export function addScriptStatement(
+  env: MarkdownEnv,
+  statement: string,
+  envCaches: Map<MDFilePath, Set<string>>
+) {
   const script = env.sfcBlocks?.scripts[0]
+
+  const envCache = envCaches.get(env.path)
+
+  /** 如果已经存在，则不再添加 */
+  if (envCache?.has(statement)) {
+    return
+  }
+
+  if (!envCache) {
+    envCaches.set(env.path, new Set([statement]))
+  } else {
+    envCache.add(statement)
+  }
 
   const tagOpen = '<script setup lang="ts">'
   const tagClose = '</script>'
 
   if (script) {
     script.tagOpen = tagOpen
-    script.contentStripped += statement
+    script.contentStripped = statement + '\n' + script.contentStripped
     script.content = script.tagOpen + script.contentStripped + script.tagClose
   } else {
     env.sfcBlocks?.scripts.push({
@@ -29,54 +45,32 @@ export function addScriptStatement(env: MarkdownEnv, statement: string) {
 export function addImportScript(
   env: MarkdownEnv,
   demoPath: string,
-  demoFullPath: string
+  demoFullPath: string,
+  envCaches: Map<MDFilePath, Set<string>>
 ) {
+  // 将demoPath转换为组件名
   const componentName = camelCase(
     demoPath.replace(/\.vue$/, '').replace(/[\/\\]/g, '-'),
     'upper'
   )
 
-  const mdEnvImports = importCache.get(env.path)
-  if (mdEnvImports?.has(componentName)) {
-    return componentName
-  }
-
-  if (!mdEnvImports) {
-    importCache.set(env.path, new Set([componentName]))
-  } else {
-    mdEnvImports.add(componentName)
-  }
-
+  // 将demoFullPath转换为import路径
   let demoDir = path
     .relative(path.dirname(env.path), demoFullPath)
     .replace(/\\/g, '/')
   demoDir = demoDir.startsWith('.') ? demoDir : `./${demoDir}`
 
-  const importerStatement = `\nimport ${componentName} from '${demoDir}'\n`
+  const importerStatement = `import ${componentName} from '${demoDir}'`
 
-  addScriptStatement(env, importerStatement)
+  addScriptStatement(env, importerStatement, envCaches)
 
   return componentName
 }
 
-export function addDemoComponent(env: MarkdownEnv) {
-  const DemoComponentName = 'VDemo'
-
-  const mdEnvImports = importCache.get(env.path)
-  if (mdEnvImports?.has(DemoComponentName)) {
-    return
-  }
-
-  if (!mdEnvImports) {
-    importCache.set(env.path, new Set([DemoComponentName]))
-  } else {
-    mdEnvImports.add(DemoComponentName)
-  }
-
-  const statement = `
-  import { VDemo } from 'vitepress-demo-container/components'
-
-  `
-
-  addScriptStatement(env, statement)
+export function addDemoComponent(
+  env: MarkdownEnv,
+  envCaches: Map<MDFilePath, Set<string>>
+) {
+  const statement = `import { VDemo } from 'vitepress-demo-container/components'`
+  addScriptStatement(env, statement, envCaches)
 }
