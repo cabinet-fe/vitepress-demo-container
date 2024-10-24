@@ -1,0 +1,10 @@
+{
+  "extends": "ts-conf-base/tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "composite": true,
+    "outDir": "../../dist/components"
+  },
+  "include": ["**/*.ts", "**/*.vue"],
+  "exclude": ["vite.config.ts"]
+}

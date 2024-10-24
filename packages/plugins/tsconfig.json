@@ -1,0 +1,10 @@
+{
+  "extends": "ts-conf-base/tsconfig.node.json",
+  "compilerOptions": {
+    "declaration": true,
+    "composite": true,
+    "outDir": "../../dist/plugins"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["vite.config.ts"]
+}
