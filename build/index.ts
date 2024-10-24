@@ -1,16 +1,18 @@
-import { buildComponents } from './build-components'
-import { buildMdPlugins } from './build-md-plugins'
 import { updateVersion } from '@helper/build'
 import path from 'path'
 import fs from 'fs'
 import { $ } from 'bun'
 
 async function build() {
-  await Promise.all([buildComponents(), buildMdPlugins()])
-  const pkgJSONPath = path.resolve(__dirname, '../lib/package.json')
+  await Promise.all([
+    $`bun run build`.cwd(path.resolve(__dirname, '../packages/components')),
+    $`bun run build`.cwd(path.resolve(__dirname, '../packages/plugins'))
+  ])
+
+  const pkgJSONPath = path.resolve(__dirname, '../package.json')
   await updateVersion(pkgJSONPath)
   fs.cpSync(
-    path.resolve(__dirname, '../lib/README.md'),
+    path.resolve(__dirname, '../README.md'),
     path.resolve(__dirname, '../dist/README.md')
   )
 

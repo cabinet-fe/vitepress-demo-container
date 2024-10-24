@@ -1,7 +1,9 @@
 {
   "references": [
-    { "path": "./lib/tsconfig.json" },
+    { "path": "./packages/components/tsconfig.json" },
+    { "path": "./packages/plugins/tsconfig.json" },
     { "path": "./docs/tsconfig.json" },
-    { "path": "./build/tsconfig.json" }
+    { "path": "./build/tsconfig.json" },
+    { "path": "./tsconfig.node.json" }
   ]
 }
