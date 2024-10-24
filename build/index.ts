@@ -3,6 +3,7 @@ import { buildMdPlugins } from './build-md-plugins'
 import { updateVersion } from '@helper/build'
 import path from 'path'
 import fs from 'fs'
+import { $ } from 'bun'
 
 async function build() {
   await Promise.all([buildComponents(), buildMdPlugins()])
@@ -31,6 +32,12 @@ async function build() {
       2
     )
   )
+
+  try {
+    await $`cd ../dist && npm publish --registry http://192.168.31.250:6005`
+  } catch (error: any) {
+    console.error(error.stderr?.toString())
+  }
 }
 
 build()
