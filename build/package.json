@@ -1,0 +1,7 @@
+{
+  "name": "build",
+  "type": "module",
+  "scripts": {
+    "release": "bun index.ts"
+  }
+}
