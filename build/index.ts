@@ -24,7 +24,7 @@ async function build() {
         description: pkgJSON.description,
         exports: {
           './components': './components/index.js',
-          './plugins': './plugin/index.js',
+          './plugins': './plugins/index.js',
           './*': './*'
         }
       },
