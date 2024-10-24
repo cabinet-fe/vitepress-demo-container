@@ -10,7 +10,8 @@
     "ts-conf-base": "^2.3.3",
     "typescript": "^5.0.0",
     "vitepress-demo-container": "workspace:*",
-    "@helper/build": "^1.0.0"
+    "@helper/build": "^1.0.0",
+    "vite-plugin-dts": "^4.3.0"
   },
   "dependencies": {
     "markdown-it-container": "^4.0.0",

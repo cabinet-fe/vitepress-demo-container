@@ -4,9 +4,10 @@
   "type": "module",
   "exports": {
     "./components": "./components/index.ts",
-    "./plugin": "./plugin/index.ts",
+    "./plugins": "./plugins/index.ts",
     "./*": "./*"
   },
+  "description": "vitepress demo 容器",
   "scripts": {
     "build": "vite build"
   }
