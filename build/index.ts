@@ -22,6 +22,7 @@ async function build() {
         name: pkgJSON.name,
         version: pkgJSON.version,
         description: pkgJSON.description,
+        type: 'module',
         exports: {
           './components': './components/index.js',
           './plugins': './plugins/index.js',
