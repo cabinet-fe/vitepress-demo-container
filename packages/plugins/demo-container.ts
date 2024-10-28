@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs'
 import type { RenderRule } from 'markdown-it/lib/renderer.mjs'
 import type { MarkdownEnv } from 'vitepress'
-import { addDemoComponent, addImportScript } from './helper'
+import { addImportScript } from './helper'
 
 interface ContainerOptions {
   /** 示例组件根目录 */
@@ -53,7 +53,7 @@ export function DemoContainer(md: MarkdownIt, options?: ContainerOptions) {
         const fileExist = fs.existsSync(demoFullPath)
 
         /** 添加demo组件导入脚本 */
-        addDemoComponent(env, envCaches)
+        // addDemoComponent(env, envCaches)
 
         const componentName = addImportScript(
           env,

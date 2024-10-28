@@ -29,9 +29,27 @@ export default defineConfig({
 })
 ```
 
-3. 如果你要预览 vue 组件
+3. 在 vitepress 主题中注册 demo 组件
 
-3.1 全局注册
+```ts
+// .vitepress/theme/index.ts
+import { VDemo } from 'vitepress-demo-container/components'
+export default {
+  extends: DefaultTheme,
+  Layout: () => {
+    return h(DefaultTheme.Layout, null, {
+      // https://vitepress.dev/guide/extending-default-theme#layout-slots
+    })
+  },
+  enhanceApp({ app, router, siteData }) {
+    app.component('VDemo', VDemo)
+  }
+} satisfies Theme
+```
+
+4. 如果你要预览 vue 组件
+
+4.1 全局注册
 
 ```ts
 // .vitepress/theme/index.ts
@@ -53,7 +71,7 @@ export default {
 } satisfies Theme
 ```
 
-3.2 或在 demo 组件中导入
+4.2 或在 demo 组件中导入
 
 ```vue
 <script setup>
@@ -61,7 +79,7 @@ import { UButton } from 'ultra-ui'
 </script>
 ```
 
-3.3 或在 vitepress 配置中使用按需导入插件
+4.3 或在 vitepress 配置中使用按需导入插件
 
 ```ts
 // .vitepress/config.ts

@@ -2,7 +2,7 @@
   "name": "vitepress-demo-container",
   "type": "module",
   "description": "vitepress demo 容器",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "devDependencies": {
     "@types/bun": "latest",
     "vitepress": "^1.4.1",

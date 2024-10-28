@@ -75,9 +75,3 @@ const copyCode = async () => {
   message.success('复制成功')
 }
 </script>
-
-<style lang="css">
-.language-vue .shiki {
-  background-color: transparent !important;
-}
-</style>
