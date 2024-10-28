@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import { DemoContainer } from '../../lib/plugins'
+import { DemoContainer } from '../../packages/plugins'
 import { UltraUIResolver } from 'vite-helper'
 import Components from 'unplugin-vue-components/vite'
 

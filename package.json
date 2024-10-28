@@ -2,7 +2,7 @@
   "name": "vitepress-demo-container",
   "type": "module",
   "description": "vitepress demo 容器",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "devDependencies": {
     "@types/bun": "latest",
     "vitepress": "^1.4.1",
@@ -11,7 +11,6 @@
     "vite-helper": "^1.0.5",
     "ts-conf-base": "^2.3.3",
     "typescript": "^5.0.0",
-    "vitepress-demo-container": "workspace:*",
     "@helper/build": "^1.0.0",
     "vite-plugin-dts": "^4.3.0"
   },
