@@ -49,7 +49,7 @@ export default {
 
 4. 如果你要预览 vue 组件
 
-4.1 全局注册
+4.1 全局注册 (推荐)
 
 ```ts
 // .vitepress/theme/index.ts
@@ -75,30 +75,9 @@ export default {
 
 ```vue
 <script setup>
+import 'ultra-ui/components/button/style'
 import { UButton } from 'ultra-ui'
 </script>
-```
-
-4.3 或在 vitepress 配置中使用按需导入插件
-
-```ts
-// .vitepress/config.ts
-import { defineConfig } from 'vitepress'
-import Components from 'unplugin-vue-components/vite'
-
-export default defineConfig({
-  // 其他配置...
-  vite: {
-    plugins: [
-      Components({
-        resolvers: [
-          // 添加ultra-ui组件解析器
-          // https://github.com/unplugin/unplugin-vue-components
-        ]
-      })
-    ]
-  }
-})
 ```
 
 恭喜:tada:，至此，所有的工作就都完成了。
