@@ -68,6 +68,7 @@ export function DemoContainer(md: MarkdownIt, options?: ContainerOptions) {
 
         // 开始标签
         return `
+        <ClientOnly>
         <v-demo
           source-code="${sourceCode}" title="${title}"
           :component="${componentName}">
@@ -77,7 +78,7 @@ export function DemoContainer(md: MarkdownIt, options?: ContainerOptions) {
       return ''
     }
 
-    return '</v-demo>'
+    return '</v-demo> </ClientOnly>'
   }
 
   md.use(container, 'demo', {

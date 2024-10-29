@@ -3,9 +3,7 @@
     <u-card-header v-if="title"> {{ title }} </u-card-header>
 
     <u-card-content>
-      <ClientOnly>
-        <component :is="component" />
-      </ClientOnly>
+      <component :is="component" />
     </u-card-content>
 
     <u-card-action style="text-align: right">
