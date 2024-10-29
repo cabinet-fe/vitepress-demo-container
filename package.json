@@ -2,7 +2,7 @@
   "name": "vitepress-demo-container",
   "type": "module",
   "description": "vitepress demo 容器",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "devDependencies": {
     "@types/bun": "latest",
     "vitepress": "^1.4.1",
@@ -18,7 +18,8 @@
     "markdown-it-container": "^4.0.0",
     "ultra-ui": "0.1.28",
     "shiki": "^1.22.0",
-    "cat-kit": "^3.7.3"
+    "cat-kit": "^3.7.3",
+    "vue": "^3.5.12"
   },
   "workspaces": [
     "docs",

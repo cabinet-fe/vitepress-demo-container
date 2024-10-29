@@ -1,6 +1,6 @@
 # 快速开始
 
-1. 在你的 md 文件中使用 demo 容器:
+1. 在你的 md 文件中使用 demo 容器 :
 
 ```md
 :::demo ultra-ui 按钮示例

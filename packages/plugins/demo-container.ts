@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs'
 import type { RenderRule } from 'markdown-it/lib/renderer.mjs'
 import type { MarkdownEnv } from 'vitepress'
-import { addImportScript } from './helper'
+import { addImportScript, addScriptStatement } from './helper'
 
 interface ContainerOptions {
   /** 示例组件根目录 */
@@ -55,6 +55,12 @@ export function DemoContainer(md: MarkdownIt, options?: ContainerOptions) {
         /** 添加demo组件导入脚本 */
         // addDemoComponent(env, envCaches)
 
+        addScriptStatement(
+          env,
+          'import { useData } from "vitepress"',
+          envCaches
+        )
+
         const componentName = addImportScript(
           env,
           demoPath,
@@ -71,7 +77,7 @@ export function DemoContainer(md: MarkdownIt, options?: ContainerOptions) {
         <ClientOnly>
         <v-demo
           source-code="${sourceCode}" title="${title}"
-          :component="${componentName}">
+          :component="${componentName}" :use-data="useData">
          `
       }
 

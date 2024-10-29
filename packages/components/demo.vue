@@ -33,7 +33,6 @@ import CodeOpen from './icons/code.vue'
 import Copy from './icons/copy.vue'
 import { codeToHtml } from 'shiki'
 import { clipboard } from 'cat-kit/fe'
-import { useData } from 'vitepress'
 import { message } from 'ultra-ui'
 
 defineOptions({
@@ -48,20 +47,22 @@ const props = defineProps<{
   title?: string
   /** 组件 */
   component: Component
+  /** 是否黑暗模式 */
+  useData?: () => any
 }>()
 
 const visible = shallowRef(false)
 
-const { isDark } = useData()
-
 const code = shallowRef('')
+
+const { isDark } = props.useData?.() || {}
 
 watchEffect(async () => {
   code.value = await codeToHtml(
     props.sourceCode ? decodeURIComponent(props.sourceCode) : '',
     {
       lang: 'vue',
-      theme: isDark.value ? 'one-dark-pro' : 'vitesse-light'
+      theme: isDark?.value ? 'one-dark-pro' : 'vitesse-light'
     }
   )
 })
