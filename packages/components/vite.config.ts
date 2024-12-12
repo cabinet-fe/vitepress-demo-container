@@ -5,6 +5,8 @@ import Components from 'unplugin-vue-components/vite'
 import { UltraUIResolver } from 'vite-helper'
 import dts from 'vite-plugin-dts'
 
+console.log(path.resolve(__dirname, './index.ts'))
+
 export default defineConfig({
   build: {
     emptyOutDir: true,
