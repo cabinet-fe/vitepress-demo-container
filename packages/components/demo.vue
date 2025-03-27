@@ -40,16 +40,21 @@ defineOptions({
   inheritAttrs: false
 })
 
-const props = defineProps<{
-  /** 源码 */
-  sourceCode?: string
-  /** 标题 */
-  title?: string
-  /** 组件 */
-  component: Component
-  /** 是否黑暗模式 */
-  useData?: () => any
-}>()
+const props = withDefaults(
+  defineProps<{
+    /** 源码 */
+    sourceCode?: string
+    /** 标题 */
+    title?: string
+    /** 组件 */
+    component: Component
+    /** vite提供的 useData 方法 */
+    useData?: () => any
+  }>(),
+  {
+    title: '源代码'
+  }
+)
 
 const visible = shallowRef(false)
 
