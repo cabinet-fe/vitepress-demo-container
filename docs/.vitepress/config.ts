@@ -32,6 +32,7 @@ export default defineConfig({
     resolve: {
       extensions: ['.ts', '.tsx', '.js']
     },
+
     server: {
       port: 5183
     },
